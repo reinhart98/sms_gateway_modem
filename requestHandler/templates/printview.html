@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <META HTTP-EQUIV="refresh" CONTENT="3600">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/static/js/function.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/printview.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+    <!-- <script src="/static/js/function.js.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>VIEW!</title>
+  </head>
+  
+  <body>
+    <div id="wrapper">
+     <h1>Log Print Last 10 WO</h1>
+     
+     <table id="keywords" cellspacing="0" cellpadding="0">
+       <thead>
+         <tr >
+           <th><span>WOId</span></th>
+           <th><span>Date</span></th>
+           <th><span>M_Start</span></th>
+           <th><span>M_End</span></th>
+           <th><span>OUTPUT</span></th>
+           <th><span>Action</span></th>
+           
+         </tr>
+       </thead>
+       <tbody>
+         <!-- For loop logic of jinja template -->
+         {%for i in datas%} 
+         <!-- Table Row -->
+         <tr>
+           <!-- <td><button class="btn btn-link btn-sm" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" data-id="{{i['wo_no']}}" onclick="goDoTakeId(this.getAttribute('data-id'));">{{i["wo_no"]}}</button></td> -->
+           
+           <td class="lalign"><a id="option1" 
+            data-id="{{i['wo_no']}},{{i['number']}}" data-toggle="modal" data-target="#printviewModal"  
+            href="#" 
+            onclick="goDoTakeId(this.getAttribute('data-id'));">{{i["wo_no"]}}</a></td>
+           <td>{{i["tanggal"]}}</td>
+           <td>{{i["mach_start"]}}</td>
+           <td>{{i["mach_end"]}}</td>
+           <td>{{i["output_mach"]}}</td>
+           <td><button type="button" data-id="{{i['wo_no']}},{{i['number']}}" class="btn btn-info btn-sm" onclick="printdatas(this.getAttribute('data-id'));">RePrint</button></td>
+           <!-- <th scope="row">1</th>
+          onclick="printdatas(this.getAttribute('data-id'));"
+           <td>Mark</td>
+           <td>Otto</td>
+           <td>@mdo</td> -->
+         {%endfor%}
+         <!-- Modal -->
+         <div class="modal fade" id="printviewModal" tabindex="-1" role="dialog" aria-labelledby="printviewModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="printviewModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" id=modalbody>
+                <p id=akum><b>AKUM MACHINE   :</b></p>
+                <p id=shift><b>SHIFT          :</b></p>
+                <p><b>DESCRIPTION    :</b></p>
+                <p><b>MACHINE NUMBER :</b></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+       </tbody>
+     </table>
+     <!-- <button type="button" class="btn btn-danger" style="margin-left: 700px;" onclick="printAll();">PRINTALL</button> -->
+    </div> 
+    
+   </body>
+</html>
