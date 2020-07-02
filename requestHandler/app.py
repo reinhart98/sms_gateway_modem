@@ -87,6 +87,11 @@ def getdataibx():
     proc = appdata.getDataAll()
     return str(proc)
 
+@app.route('/api/getnulldata')
+def getdatanull():
+    proc = appdata.getFixNullData()
+    return jsonify(proc)
+
 
 if __name__ == "__main__":
     try:

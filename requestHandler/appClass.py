@@ -206,6 +206,32 @@ class Appclass:
             # tulis table dulu baru check format
             print("str")
             return self.smscheckformatdata(splitdatas[0],splitdatas[1])
+    
+    def getNullData(self):
+        conn = self.connection()
+        datas = []
+        newdatas = []
+        with conn:
+            cursor = conn.cursor()
+            cursor.execute('SELECT ID,PhoneNumber,Text FROM CASQ.dbo.CASSMSSentItem WHERE SentFlag IS NULL')
+            for i in cursor:
+                i = str(i).replace("'","")
+                i = i.replace('(',"")
+                i = i.replace(')',"")
+                datas.append(i)
+        return datas
+    
+    def getFixNullData(self):
+        lstdatas = self.getNullData()
+        newdatas = []
+        if(len(lstdatas) > 0):
+            for i in lstdatas:
+                splitstr = i.split(",")
+                if "+62" in splitstr[1]:
+                    print(i)
+                    newdatas.append(i)
+                
+        return newdatas
             
         
         

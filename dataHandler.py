@@ -33,14 +33,17 @@ class SQLHandler:
         return datas
     
     def getFixNullData(self):
-        lstdatas = self.getNullData()
-        newdatas = []
-        if(len(lstdatas) > 0):
-            for i in lstdatas:
-                splitstr = i.split(",")
-                if "+62" in splitstr[1]:
-                    print(i)
-                    newdatas.append(i)
+        url = "http://192.168.189.2:20002/api/getnulldata"
+        r = requests.get(url)
+        newdatas = json.loads(r.text)
+        # lstdatas = self.getNullData()
+        # newdatas = []
+        # if(len(lstdatas) > 0):
+        #     for i in lstdatas:
+        #         splitstr = i.split(",")
+        #         if "+62" in splitstr[1]:
+        #             print(i)
+        #             newdatas.append(i)
                 
         return newdatas
     
